@@ -1,0 +1,53 @@
+{
+  "name": "DSS",
+  "description": "Documented Style Sheets",
+  "version": "1.0.0",
+  "homepage": "https://github.com/darcyclarke/DSS",
+  "author": {
+    "name": "darcyclarke",
+    "email": "darcy@darcyclarke.me",
+    "url": "https://darcyclarke.me"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darcyclarke/DSS"
+  },
+  "bugs": {
+    "url": "https://github.com/darcyclarke/DSS/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/darcyclarke/DSS/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "mustache": "0.7.0",
+    "wrench": "1.4.4"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.3.0",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-clean": "~0.4.0"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  },
+  "keywords": [
+    "gruntplugin",
+    "css",
+    "dss",
+    "styles",
+    "docs",
+    "documentation",
+    "cli"
+  ]
+}
