@@ -1,8 +1,8 @@
 {
-  "name": "DSS",
-  "description": "Documented Style Sheets",
+  "name": "grunt-dss",
+  "description": "Build UI Documentation with the DSS Parser",
   "version": "1.0.0",
-  "homepage": "https://github.com/darcyclarke/DSS",
+  "homepage": "https://github.com/darcyclarke/grunt-dss",
   "author": {
     "name": "darcyclarke",
     "email": "darcy@darcyclarke.me",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/darcyclarke/DSS"
+    "url": "https://github.com/darcyclarke/grunt-dss"
   },
   "bugs": {
-    "url": "https://github.com/darcyclarke/DSS/issues"
+    "url": "https://github.com/darcyclarke/grunt-dss/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/darcyclarke/DSS/blob/master/LICENSE-MIT"
+      "url": "https://github.com/darcyclarke/grunt-dss/blob/master/LICENSE-MIT"
     }
   ],
   "main": "Gruntfile.js",
@@ -29,6 +29,7 @@
     "test": "grunt test"
   },
   "dependencies": {
+    "dss": "1.0.1",
     "mustache": "0.7.0",
     "wrench": "1.4.4"
   },
