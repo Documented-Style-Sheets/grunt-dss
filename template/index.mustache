@@ -3,9 +3,11 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>{{project.name}} styleguide</title>  
-  <link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
+  <link rel="stylesheet" href="assets/js/prettify/prettify.css?v=1" type="text/css" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=1" type="text/css" />
+  <script src="assets/js/prettify/prettify.js?v=1"></script>
 </head>
-<body>
+<body onload="prettyPrint()">
   
   <header>
     <h1>{{project.name}} styleguide</h1>
@@ -56,12 +58,12 @@
                 <div class="example state {{class}}">
                   <div class="name">{{name}}</div>
                   {{#markup}}
-                    {{markup}}
+                    {{{markup.example}}}
                   {{/markup}}
                 </div>
               {{/state}}
 
-<pre class="markup">
+<pre class="prettyprint lang-html markup">
 {{{markup.escaped}}}
 </pre>
             
