@@ -15,7 +15,7 @@ var dss = require('dss');
 module.exports = function(grunt){
 
   // Register DSS
-  grunt.registerMultiTask('DSS', 'Parse DSS comment blocks', function(){
+  grunt.registerMultiTask('dss', 'Parse DSS comment blocks', function(){
 
     // Setup async promise
     var promise = this.async();
