@@ -1,13 +1,9 @@
 {
   "name": "grunt-dss",
   "description": "Build UI Documentation with the DSS Parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/darcyclarke/grunt-dss",
-  "author": {
-    "name": "darcyclarke",
-    "email": "darcy@darcyclarke.me",
-    "url": "https://darcyclarke.me"
-  },
+  "author": "darcyclarke <darcy@darcyclarke.me> (https://darcyclarke.me)",
   "repository": {
     "type": "git",
     "url": "https://github.com/darcyclarke/grunt-dss"
@@ -29,7 +25,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "dss": "1.0.1",
+    "dss": "1.0.2",
     "mustache": "0.7.0",
     "wrench": "1.4.4"
   },
@@ -50,5 +46,13 @@
     "docs",
     "documentation",
     "cli"
-  ]
+  ],
+  "gitHead": "9ac17c8a2715bede330bd4fed3ba8e4648ce1542",
+  "readmeFilename": "README.md",
+  "directories": {
+    "doc": "docs",
+    "example": "example",
+    "test": "test"
+  },
+  "license": "BSD"
 }
