@@ -22,22 +22,25 @@ In your project's Gruntfile, add a section named `dss` to the data object passed
 ## Options
 
 #### options.template
+
 Type: `String`
 Default value: `{task_path}/template/`
 
 A relative path to a `mustache` template to be used instead of the default
 
 #### options.parsers
+
 Type: `Object`
 Default value: `{}`
 
 An object filled with key value pairs of functions to be used when parsing comment blocks. See the **example** below for more context about how to use these.
 
 #### options.files
-Type: `String`
-Default value: `{task_path}/template/`
 
-A relative path to a `mustache` template to be used instead of the default
+Type: `Array` or `Object`
+Default value: `[]`
+
+Files to parse. Using Grunt default `files` syntax. [More about that on Gruntjs wiki](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#files).
 
 ### Example initConfig
 
