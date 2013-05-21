@@ -1,6 +1,6 @@
 # Grunt-DSS [![Build Status](https://secure.travis-ci.org/darcyclarke/grunt-dss.png?branch=master)](http://travis-ci.org/darcyclarke/grunt-dss)
 
-**Grunt-DSS** is a **[Grunt](http://gruntjs.com)** plugin that generates UI documentation from CSS, LESS, STYLUS, SASS and SCSS files based on the **[DSS](https://github.com/darcyclarke/dss)** parser output.
+**Grunt-DSS** is a **[Grunt](http://gruntjs.com)** plugin that generates UI documentation from CSS, Less, Stylus, Sass files based on the **[DSS](https://github.com/darcyclarke/dss)** parser output.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
@@ -19,14 +19,35 @@ grunt.loadNpmTasks('grunt-dss');
 
 In your project's Gruntfile, add a section named `dss` to the data object passed into `grunt.initConfig()`.
 
-## Options
+## Settings
+
+#### files
+
+Type: `Array` or `Object`
+Default value: `[]`
+
+Files to parse. Using Grunt default `files` syntax. [More about that on Gruntjs wiki](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#files).
 
 #### options.template
 
 Type: `String`
 Default value: `{task_path}/template/`
 
-A relative path to a `mustache` template to be used instead of the default
+A relative path to a `mustache` template to be used instead of the default.
+
+#### options.template_index
+
+Type: `String`
+Default value: `index.mustache`
+
+The filename of the index of the template.
+
+#### options.output_index
+
+Type: `String`
+Default value: `index.html`
+
+The filename of the index for the output file.
 
 #### options.parsers
 
@@ -35,19 +56,15 @@ Default value: `{}`
 
 An object filled with key value pairs of functions to be used when parsing comment blocks. See the **example** below for more context about how to use these.
 
-#### options.files
-
-Type: `Array` or `Object`
-Default value: `[]`
-
-Files to parse. Using Grunt default `files` syntax. [More about that on Gruntjs wiki](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#files).
-
 ### Example initConfig
 
 ```javascript
 grunt.initConfig({
   dss: {
     docs: {
+      files: {
+        'api/': 'css/**/*.{css,scss,sass,less,styl}'
+      },
       options: {
         template: '/dark_theme/',
         parsers: {
@@ -60,9 +77,6 @@ grunt.initConfig({
             return line;
           }
         }
-      },
-      files: {
-        'api/': 'css/**/*.{css,scss,sass,less,styl}'
       }
     }
   }
