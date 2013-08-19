@@ -7,7 +7,7 @@
  */
 
 // Include dependancies
-var mustache = require('mustache');
+var handlebars = require('handlebars');
 var dss = require('dss');
 
 // Expose
@@ -22,7 +22,7 @@ module.exports = function(grunt){
     // Merge task-specific and/or target-specific options with defaults
     var options = this.options({
       template: __dirname + '/../template/',
-      template_index: 'index.mustache',
+      template_index: 'index.handlebars',
       output_index: 'index.html'
     });
 
@@ -84,7 +84,7 @@ module.exports = function(grunt){
               grunt.fail('Cannot read the template file');
             }
 
-            // copy template assets (except index.mustache)
+            // copy template assets (except index.handlebars)
             grunt.file.expandMapping([
               '**/*',
               '!' + options.template_index
@@ -101,7 +101,7 @@ module.exports = function(grunt){
             });
 
             // Create HTML ouput
-            var html = mustache.render(grunt.file.read(template_filepath), {
+            var html = handlebars.compile(grunt.file.read(template_filepath))({
               project: grunt.file.readJSON('package.json'),
               files: styleguide
             });
