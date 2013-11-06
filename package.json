@@ -1,7 +1,7 @@
 {
   "name": "grunt-dss",
   "description": "Build UI Documentation with the DSS Parser",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "homepage": "https://github.com/darcyclarke/grunt-dss",
   "author": "darcyclarke <darcy@darcyclarke.me> (https://darcyclarke.me)",
   "repository": {
@@ -52,6 +52,5 @@
     "doc": "docs",
     "example": "example",
     "test": "test"
-  },
-  "license": "BSD"
+  }
 }
