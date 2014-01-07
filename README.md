@@ -82,3 +82,7 @@ grunt.initConfig({
   }
 });
 ````
+
+## DSS Sublime Text Plugin
+
+You can now **auto-complete** DSS-style comment blocks using @sc8696's [Auto-Comments Sublime Text Plugin](https://github.com/sc8696/sublime-css-auto-comments)
