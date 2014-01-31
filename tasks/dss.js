@@ -65,68 +65,77 @@ module.exports = function(grunt){
         // Parse
         dss.parse(grunt.file.read(filename), { file: filename }, function(parsed) {
 
-          // Add filename
-          parsed['file'] = filename;
+          // Continue only if file contains DSS annotation
+          if (parsed.blocks.length) {
 
-          // Add comment block to styleguide
-          styleguide.push(parsed);
+            // Add filename
+            parsed['file'] = filename;
 
-          // Check if we're done
-          if(length > 1) {
-            length--;
-          }
-          else {
-            // Set output template and file
-            var template_filepath = template_dir + options.template_index,
-                output_filepath = output_dir + options.output_index;
+            // Add comment block to styleguide
+            styleguide.push(parsed);
 
-            if (!grunt.file.exists(template_filepath)) {
-              grunt.fail('Cannot read the template file');
-            }
-
-            // copy template assets (except index.handlebars)
-            grunt.file.expandMapping([
-              '**/*',
-              '!' + options.template_index
-            ], output_dir, { cwd: template_dir }).forEach(function(filePair) {
-              filePair.src.forEach(function(src) {
-                if (grunt.file.isDir(src)) {
-                  grunt.verbose.writeln('Creating ' + filePair.dest.cyan);
-                  grunt.file.mkdir(filePair.dest);
-                } else {
-                  grunt.verbose.writeln('Copying ' + src.cyan + ' -> ' + filePair.dest.cyan);
-                  grunt.file.copy(src, filePair.dest);
-                }
-              });
-            });
-
-            // Create HTML ouput
-            var html = handlebars.compile(grunt.file.read(template_filepath))({
-              project: grunt.file.readJSON('package.json'),
-              files: styleguide
-            });
-
-            var output_type = 'created', output = null;
-            if (grunt.file.exists(output_filepath)) {
-              output_type = 'overwrited';
-              output = grunt.file.read(output_filepath);
-            }
-            // avoid write if there is no change
-           if (output !== html) {
-              // Render file
-              grunt.file.write(output_filepath, html);
-
-              // Report build
-              grunt.log.writeln('✓ Styleguide ' + output_type + ' at: ' + grunt.log.wordlist([output_dir], {color: 'cyan'}));
+            // Check if we're done
+            if (length > 1) {
+              length--;
             }
             else {
-              // no change
-              grunt.log.writeln('‣ Styleguide unchanged');
+              // Set output template and file
+              var template_filepath = template_dir + options.template_index,
+                  output_filepath = output_dir + options.output_index;
+
+              if (!grunt.file.exists(template_filepath)) {
+                grunt.fail('Cannot read the template file');
+              }
+
+              // copy template assets (except index.handlebars)
+              grunt.file.expandMapping([
+                '**/*',
+                '!' + options.template_index
+              ], output_dir, { cwd: template_dir }).forEach(function(filePair) {
+                filePair.src.forEach(function(src) {
+                  if (grunt.file.isDir(src)) {
+                    grunt.verbose.writeln('Creating ' + filePair.dest.cyan);
+                    grunt.file.mkdir(filePair.dest);
+                  } else {
+                    grunt.verbose.writeln('Copying ' + src.cyan + ' -> ' + filePair.dest.cyan);
+                    grunt.file.copy(src, filePair.dest);
+                  }
+                });
+              });
+
+              // Create HTML ouput
+              var html = handlebars.compile(grunt.file.read(template_filepath))({
+                project: grunt.file.readJSON('package.json'),
+                files: styleguide
+              });
+
+              var output_type = 'created', output = null;
+              if (grunt.file.exists(output_filepath)) {
+                output_type = 'overwrited';
+                output = grunt.file.read(output_filepath);
+              }
+              // avoid write if there is no change
+              if (output !== html) {
+                // Render file
+                grunt.file.write(output_filepath, html);
+
+                // Report build
+                grunt.log.writeln('✓ Styleguide ' + output_type + ' at: ' + grunt.log.wordlist([output_dir], {color: 'cyan'}));
+              }
+              else {
+                // no change
+                grunt.log.writeln('‣ Styleguide unchanged');
+              }
+
+              // Return promise
+              promise();
+
             }
-
-            // Return promise
-            promise();
-
+          } else {
+            // Check if we're done
+            if (length > 1) {
+              length--;
+            }
           }
 
         });
