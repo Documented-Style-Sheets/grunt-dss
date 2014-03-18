@@ -23,7 +23,8 @@ module.exports = function(grunt){
     var options = this.options({
       template: __dirname + '/../template/',
       template_index: 'index.handlebars',
-      output_index: 'index.html'
+      output_index: 'index.html',
+      include_empty_files: true
     });
 
     // Output options if --verbose cl option is passed
@@ -65,14 +66,17 @@ module.exports = function(grunt){
         // Parse
         dss.parse(grunt.file.read(filename), { file: filename }, function(parsed) {
 
-          // Add filename
-          parsed['file'] = filename;
+          // Continue only if file contains DSS annotation
+          if (options.include_empty_files || parsed.blocks.length) {
+            // Add filename
+            parsed['file'] = filename;
 
-          // Add comment block to styleguide
-          styleguide.push(parsed);
+            // Add comment block to styleguide
+            styleguide.push(parsed);
+          }
 
           // Check if we're done
-          if(length > 1) {
+          if (length > 1) {
             length--;
           }
           else {
@@ -112,7 +116,7 @@ module.exports = function(grunt){
               output = grunt.file.read(output_filepath);
             }
             // avoid write if there is no change
-           if (output !== html) {
+            if (output !== html) {
               // Render file
               grunt.file.write(output_filepath, html);
 
@@ -128,7 +132,6 @@ module.exports = function(grunt){
             promise();
 
           }
-
         });
 
       });
