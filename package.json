@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "dss": "1.0.3",
-    "handlebars": "1.0.12"
+    "handlebars": "^2.0.0-alpha.2"
   },
   "devDependencies": {
     "grunt": "~0.4.0",
