@@ -45,7 +45,7 @@ a {
   padding: 10px;
   display: inline-block;
   background: #efefef;
-  bored-radius: 5px;
+  border-radius: 5px;
 }
   
   /** Hover */
