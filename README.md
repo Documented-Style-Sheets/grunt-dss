@@ -38,7 +38,7 @@ A relative path to a `mustache` template to be used instead of the default.
 #### options.template_index
 
 Type: `String`
-Default value: `index.mustache`
+Default value: `index.handlebars`
 
 The filename of the index of the template.
 
@@ -55,6 +55,13 @@ Type: `Object`
 Default value: `{}`
 
 An object filled with key value pairs of functions to be used when parsing comment blocks. See the **example** below for more context about how to use these.
+
+#### options.include_empty_files
+
+Type: `Boolean`
+Default value: `true`
+
+Include files without DSS annotations.
 
 ### Example initConfig
 
