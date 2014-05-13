@@ -3,7 +3,10 @@
   "description": "Build UI Documentation with the DSS Parser",
   "version": "1.0.7",
   "homepage": "https://github.com/darcyclarke/grunt-dss",
-  "author": "darcyclarke <darcy@darcyclarke.me> (https://darcyclarke.me)",
+  "author": {
+    "name": "Darcy Clarke",
+    "url": "http://darcyclarke.me"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/darcyclarke/grunt-dss"
@@ -25,14 +28,23 @@
     "test": "grunt test"
   },
   "dependencies": {
+<<<<<<< Updated upstream
     "dss": "1.0.4",
     "handlebars": "1.0.12"
+=======
+    "grunt": "~0.4.1",
+    "load-grunt-tasks": "~0.4.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-jade": "~0.11.0",
+    "grunt-contrib-stylus": "~0.14.0",
+    "dss": "~1.0.3"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
-    "grunt": "~0.4.0",
+    "grunt-cli": "~0.1.13",
+    "load-grunt-tasks": "~0.4.0",
     "grunt-contrib-jshint": "~0.3.0",
     "grunt-contrib-nodeunit": "~0.1.2",
-    "grunt-contrib-clean": "~0.4.0"
   },
   "peerDependencies": {
     "grunt": "~0.4.0"
@@ -45,12 +57,5 @@
     "docs",
     "documentation",
     "cli"
-  ],
-  "gitHead": "9ac17c8a2715bede330bd4fed3ba8e4648ce1542",
-  "readmeFilename": "README.md",
-  "directories": {
-    "doc": "docs",
-    "example": "example",
-    "test": "test"
-  }
+  ]
 }

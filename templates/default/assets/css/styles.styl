@@ -1,0 +1,235 @@
+@import 'nib'
+
+*, *:before, *:after
+  box-sizing: border-box;
+  font-smoothing: antialiased
+  text-size-adjust: 100%
+  backface-visibility: hidden
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr,
+acronym, address, big, cite, code, del, dfn, em, img,
+ins, kbd, q, s, samp, small, strike, strong,
+sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, figure, figcaption,
+footer, header, hgroup, menu, nav, output, ruby,
+section, summary, time, mark, audio, video
+  margin: 0
+  padding: 0
+  border: 0
+  vertical-align: baseline
+  position: relative
+
+article, aside, details, figcaption,
+figure, footer, header, hgroup,
+main, nav, section, summary
+  display: block
+
+audio, canvas, video
+  display: inline-block
+
+html, body
+  background:
+  color:
+  font-family: sans-serif
+  font-size: 16px
+  line-height: 160px
+  padding: 0
+  margin: 0
+  height: 100%
+  width: 100%
+  display: flex
+  flex-direction: column
+  box-align: center
+
+a
+  color: black
+  text-decoration: underline
+
+a:hover,
+a:visited,
+a:active
+  color: black
+
+a:focus
+  outline: thin dotted
+
+a:active, a:hover
+  outline: 0
+
+.cf:before
+.cf:after
+  content: ' '
+  display: table
+
+.cf:after
+  clear: both
+
+.cf
+  *zoom: 1
+
+h1, h2, h3, h4, h5, h6, p
+  margin-bottom: $halfGrid
+
+p
+  @extend .fontSize14
+
+pre
+  font-family: 'courier new', monospace
+  white-space: pre
+  white-space: pre-wrap
+  word-wrap: break-word
+
+.header
+  width: 100%
+  padding: 60px 8% 40px
+  border-bottom: 1px solid black
+
+  h1
+    margin: 0 0 5px 0
+    padding: 0
+    float: left
+
+  .version
+    float: left
+    display: inline-block
+
+  .description
+    clear: left
+
+.wrapper
+  padding: 40px 8%
+
+  nav
+    border-bottom: 1px solid #efefef
+    padding-bottom: 40px
+    margin: 0
+
+    ul
+      margin: 0
+      padding: 0
+
+      li
+        list-style: disc
+        margin: 0 0 5px 25px
+        padding: 0
+
+  .file
+    border-bottom: 1px solid #efefef
+    padding: 0 0 30px 0
+    margin: 0
+
+    h3
+      margin: 0 0 30px 0
+      padding-top: 30px
+      font-size: 24px
+
+  .block
+    border: 1px solid #ccc
+    margin: 0 0 20px 0
+
+  .info
+    padding: 30px 40px 20px
+    background: #efefef
+    border-bottom: 1px solid #ccc
+
+    .description
+      font-style: italic
+
+    .state
+      color: red
+
+      .name
+        position: absolute
+        right: 0
+        top: 0
+        border: 1px solid #efefef
+        font-size: 10px
+        padding: 10px
+
+      span
+        font-weight: bold
+        font-family: Consolas, "Liberation Mono", Courier, monospace
+
+    .example
+      padding: 20px
+      min-height: 60px
+      position: relative
+      border-bottom: 1px solid #ccc
+
+    .markup
+      margin: 0
+      padding: 24px 20px 20px
+      font-size: 13px
+      font-family: Consolas, "Liberation Mono", Courier, monospace
+      background: #efefef
+
+.pln
+  color #333333
+
+.str
+  color #dd1144
+
+.kwd
+  color #333333
+  color #006
+  font-weight bold
+
+.com
+  color #999988
+  color #600
+  font-style italic
+
+.typ
+  color #445588
+  color #404
+  font-weight bold
+
+.lit
+  color #445588
+  color #004444
+
+.pun
+  color #333333
+
+.opn
+  color #333333
+
+.clo
+  color #333333
+
+.tag
+  color navy
+  color #006
+  font-weight bold
+
+.atn
+  color teal
+  color #440044
+
+.atv
+  color #dd1144
+  color #006600
+
+.dec
+  color #333333
+
+.var
+  color teal
+
+.fun
+  color #990000
+
+pre
+  &.prettyprint
+    background white
+    font-family Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, monospace
+    font-size 12px
+    line-height 1.5
+    padding 10px
+
+ol
+  &.linenums
+    margin-top 0
+    margin-bottom 0

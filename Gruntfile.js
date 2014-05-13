@@ -1,9 +1,10 @@
 /*
- * DSS
- * https://github.com/darcyclarke/DSS
+ * Grunt DSS - Build Plugin
+ * https://github.com/darcyclarke/grunt-dss
  *
- * Copyright (c) 2013 darcyclarke
+ * Copyright (c) 2014 Darcy Clarke
  * Licensed under the MIT license.
+ * https://github.com/darcyclarke/grunt-dss/LICENSE-MIT
  */
 
 'use strict';
@@ -11,18 +12,6 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    dss: {
-      docs: {
-        options: {
-          template: 'template/'
-        },
-        files: {
-          'docs/': 'example/**/*.{css,scss,sass,less,styl}'
-        }
-      }
-    },
-
-    // 
     jshint: {
       all: [
         'Gruntfile.js',
@@ -46,6 +35,7 @@ module.exports = function(grunt) {
 
   });
 
+  // Load NPM Tasks
   grunt.loadTasks('tasks');
 
   // Plugins that provide necessary tasks
@@ -55,7 +45,7 @@ module.exports = function(grunt) {
 
   // Whenever the test task is run, cleanup the docs folder and
   // then test the result.
-  grunt.registerTask('test', ['clean', 'dss', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'nodeunit']);
 
   // By default run the DSS task to create docs
   grunt.registerTask('default', ['clean', 'dss']);

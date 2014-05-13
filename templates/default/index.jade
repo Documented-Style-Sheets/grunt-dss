@@ -1,0 +1,69 @@
+doctype
+html
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    title {{project.name}} styleguide
+    meta(name="description", content="")
+    meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui")
+    link(rel="stylesheet", href="assets/js/prettify/prettify.css?v=1", type="text/css")
+    link(rel="stylesheet", href="assets/css/styles.css?v=1", type="text/css")
+    script(src="assets/js/prettify/prettify.js?v=1")
+
+  body(onload="prettyPrint()")
+
+  header
+
+    h1 {{project.name}} styleguide
+
+    p.version Version: {{project.version}}
+
+    p.description {{project.description}}
+
+  div.wrapper
+
+    nav.main
+
+      h2 Table of Contents
+
+      ul
+
+        each file in files
+          li: a(href="#" + file, data-file=file) file
+
+    div.styleguide
+
+      each file in files
+
+        div.file(id=file)
+
+          h3.filename file
+
+          each block in file.blocks
+            div.block
+
+              div.info
+
+                h4.blockname block.name
+
+                if block.description
+                  p.description block.description
+
+                if block.state
+                  p.state
+                    span.name block.name
+                    span.description block.description
+
+              if block.markup
+                div.example
+                  block.markup.example
+
+                if block.state
+                  div.example.state(class=state.class)
+
+                    p.name state.name
+
+                    iframe(src="data:text/html;charset=utf-8,%3Cbody%3E%style src='" + project.stylsheet + "'%3E" + block.markup.escaped + "%3C/body%3E")
+
+                pre.prettyprint.lang-html.markup block.markup.escaped
+

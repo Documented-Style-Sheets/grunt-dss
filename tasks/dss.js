@@ -1,71 +1,78 @@
 /*
- * DSS
- * https://github.com/darcyclarke/DSS
+ * Grunt DSS - Build Plugin
+ * https://github.com/darcyclarke/grunt-dss
  *
- * Copyright (c) 2013 darcyclarke
+ * Copyright (c) 2014 Darcy Clarke
  * Licensed under the MIT license.
+ * https://github.com/darcyclarke/grunt-dss/LICENSE-MIT
  */
 
-// Include dependancies
-var handlebars = require('handlebars');
-var dss = require('dss');
+var Handlebars = require('handlebars');
+var DSS = require('dss');
 
-// Expose
 module.exports = function(grunt){
 
-  // Register DSS
-  grunt.registerMultiTask('dss', 'Parse DSS comment blocks', function(){
+  // Register Task
+  grunt.registerMultiTask('dss', 'Parse DSS comment blocks', function() {
 
     // Setup async promise
+    var project = grunt.file.readJSON('package.json');
     var promise = this.async();
-
-    // Merge task-specific and/or target-specific options with defaults
     var options = this.options({
-      template: __dirname + '/../template/',
+      stylesheet: __dirname + '/styles.css',
+      output_index: 'index.html',
       template_index: 'index.handlebars',
+<<<<<<< Updated upstream
       output_index: 'index.html',
       include_empty_files: true
+=======
+      template_dir: __dirname + '/../template/'
+>>>>>>> Stashed changes
     });
 
-    // Output options if --verbose cl option is passed
+    // Verbose flags
     grunt.verbose.writeflags(options, 'Options');
 
-    // Describe custom parsers
-    for(key in options.parsers){
-      dss.parser(key, options.parsers[key]);
+    // Generate parsers from options
+    for(var key in options.parsers) {
+      DSS.parser(key, options.parsers[key]);
     }
 
-    // Build Documentation
-    this.files.forEach(function(f){
+    // Iterate over files
+    this.files.forEach( function(file) {
 
-      // Filter files based on their existence
-      var src = f.src.filter(function(filepath) {
+      // Iterate files
+      var files = file.src.filter(function(filepath) {
 
         // Warn on and remove invalid source files (if nonull was set).
         if(!grunt.file.exists(filepath)){
           grunt.log.warn('Source file "' + filepath + '" not found.');
           return false;
-        } else {
-          return true;
         }
+
+        return true;
+
       });
 
-      // Setup
-      var files = src,
-          template_dir = options.template,
-          output_dir = f.dest,
-          length = files.length,
-          styleguide = [];
+      var template_dir        = options.template_dir;
+      var output_dir          = file.dest;
+      var template_filepath   = template_dir + options.template_index;
+      var output_filepath     = output_dir + options.output_index;
+      var length              = files.length;
+      var styleguide          = [];
+      var output_type         = 'created';
+      var output              = null;
 
-      // Parse files
-      files.map(function(filename){
+      // Parse File
+      var parse_file = function(parsed) {
 
-        // Report file
-        grunt.verbose.writeln('• ' + grunt.log.wordlist([filename], {color: 'cyan'}));
+        var message = '• ' + grunt.log.wordlist([ filename ], { color: 'cyan' });
+        grunt.verbose.writeln(message);
 
-        // Parse
-        dss.parse(grunt.file.read(filename), { file: filename }, function(parsed) {
+        parsed['stylesheet'] = grunt.options.stylesheet;
+        parsed['file'] = filename;
 
+<<<<<<< Updated upstream
           // Continue only if file contains DSS annotation
           if (options.include_empty_files || parsed.blocks.length) {
             // Add filename
@@ -83,57 +90,78 @@ module.exports = function(grunt){
             // Set output template and file
             var template_filepath = template_dir + options.template_index,
                 output_filepath = output_dir + options.output_index;
+=======
+        styleguide.push(parsed);
 
-            if (!grunt.file.exists(template_filepath)) {
-              grunt.fail('Cannot read the template file');
+        if(length > 1) {
+          length--;
+        } else {
+          generate_file();
+        }
+      };
+
+      // Generate File
+      var generate_file = function() {
+>>>>>>> Stashed changes
+
+        // Check template existence
+        if (!grunt.file.exists(template_filepath)) {
+          grunt.fail('Cannot read the template file');
+        }
+
+        // Copy template assets (except index.handlebars)
+        var assets = grunt.file.expandMapping([ '**/*', '!' + options.template_index ], output_dir, { cwd: template_dir })
+        assets.forEach(function(file) {
+          file.src.forEach(function(src) {
+            if (grunt.file.isDir(src)) {
+              grunt.verbose.writeln('Creating ' + file.dest.cyan);
+              grunt.file.mkdir(file.dest);
+            } else {
+              grunt.verbose.writeln('Copying ' + src.cyan + ' -> ' + file.dest.cyan);
+              grunt.file.copy(src, file.dest);
             }
-
-            // copy template assets (except index.handlebars)
-            grunt.file.expandMapping([
-              '**/*',
-              '!' + options.template_index
-            ], output_dir, { cwd: template_dir }).forEach(function(filePair) {
-              filePair.src.forEach(function(src) {
-                if (grunt.file.isDir(src)) {
-                  grunt.verbose.writeln('Creating ' + filePair.dest.cyan);
-                  grunt.file.mkdir(filePair.dest);
-                } else {
-                  grunt.verbose.writeln('Copying ' + src.cyan + ' -> ' + filePair.dest.cyan);
-                  grunt.file.copy(src, filePair.dest);
-                }
-              });
-            });
-
-            // Create HTML ouput
-            var html = handlebars.compile(grunt.file.read(template_filepath))({
-              project: grunt.file.readJSON('package.json'),
-              files: styleguide
-            });
-
-            var output_type = 'created', output = null;
-            if (grunt.file.exists(output_filepath)) {
-              output_type = 'overwrited';
-              output = grunt.file.read(output_filepath);
-            }
+<<<<<<< Updated upstream
             // avoid write if there is no change
             if (output !== html) {
               // Render file
               grunt.file.write(output_filepath, html);
+=======
+          });
+        });
+>>>>>>> Stashed changes
 
-              // Report build
-              grunt.log.writeln('✓ Styleguide ' + output_type + ' at: ' + grunt.log.wordlist([output_dir], {color: 'cyan'}));
-            }
-            else {
-              // no change
-              grunt.log.writeln('‣ Styleguide unchanged');
-            }
-
-            // Return promise
-            promise();
-
-          }
+        // Create HTML ouput
+        var html = Handlebars.compile(grunt.file.read(template_filepath))({
+          project: project,
+          files: styleguide
         });
 
+        // Overwrite
+        if(grunt.file.exists(output_filepath)) {
+          output_type = 'overwrited';
+          output = grunt.file.read(output_filepath);
+        }
+
+<<<<<<< Updated upstream
+          }
+        });
+=======
+        // Avoid write if there is no change
+        if(output !== html) {
+          grunt.file.write(output_filepath, html);
+          grunt.log.writeln('✓ Styleguide ' + output_type + ' at: ' + grunt.log.wordlist([output_dir], {color: 'cyan'}));
+        } else {
+          grunt.log.writeln('‣ Styleguide unchanged');
+        }
+
+        promise();
+>>>>>>> Stashed changes
+
+      };
+
+      // Parse files
+      files.map(function(filename) {
+        DSS.parse(grunt.file.read(filename), { file: filename }, parse_file);
       });
 
     });
