@@ -85,7 +85,7 @@ module.exports = function(grunt){
                 output_filepath = output_dir + options.output_index;
 
             if (!grunt.file.exists(template_filepath)) {
-              grunt.fail('Cannot read the template file');
+              grunt.fail.fatal('Cannot read the template file');
             }
 
             // copy template assets (except index.handlebars)
