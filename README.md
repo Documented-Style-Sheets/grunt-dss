@@ -63,6 +63,13 @@ Default value: `true`
 
 Include files without DSS annotations.
 
+#### options-handlebar_helpers
+
+Type: `Object`
+Default value: `{}`
+
+An object filled with key value pairs of handlebars helpers. The key is the helber name and the value is the callback function. See the [Handlebar documentation](http://handlebarsjs.com/#helpers) for more information.
+
 ### Example initConfig
 
 ```javascript
