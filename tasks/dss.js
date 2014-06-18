@@ -70,6 +70,7 @@ module.exports = function(grunt){
           if (options.include_empty_files || parsed.blocks.length) {
             // Add filename
             parsed['file'] = filename;
+            parsed['filename'] = filename.split('/').pop();
 
             // Add comment block to styleguide
             styleguide.push(parsed);
