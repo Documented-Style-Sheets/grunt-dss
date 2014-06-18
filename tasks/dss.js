@@ -36,6 +36,24 @@ module.exports = function(grunt){
       dss.parser(key, options.parsers[key]);
     }
 
+    // Extract information about the destination folders
+    var folders = [];
+    if (this.files.length > 1){
+
+      folders = this.files.map(function(f){
+
+        var title = f.dest.split("/").filter(Boolean).pop();
+        title = title.charAt(0).toUpperCase() + title.slice(1);
+
+        return {
+          dest: f.dest,
+          title: title
+        };
+
+      });
+
+    }
+
     // Build Documentation
     this.files.forEach(function(f){
 
@@ -109,6 +127,7 @@ module.exports = function(grunt){
             // Create HTML ouput
             var html = handlebars.compile(grunt.file.read(template_filepath))({
               project: grunt.file.readJSON('package.json'),
+              folders: folders,
               files: styleguide
             });
 
