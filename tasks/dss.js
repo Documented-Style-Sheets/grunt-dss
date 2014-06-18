@@ -24,7 +24,8 @@ module.exports = function(grunt){
       template: __dirname + '/../template/',
       template_index: 'index.handlebars',
       output_index: 'index.html',
-      include_empty_files: true
+      include_empty_files: true,
+      destination: './'
     });
 
     // Output options if --verbose cl option is passed
@@ -53,7 +54,7 @@ module.exports = function(grunt){
       // Setup
       var files = src,
           template_dir = options.template,
-          output_dir = f.dest,
+          output_dir = options.destination + f.dest,
           length = files.length,
           styleguide = [];
 
