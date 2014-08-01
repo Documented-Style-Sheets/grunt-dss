@@ -24,7 +24,9 @@ module.exports = function(grunt){
       template: __dirname + '/../template/',
       template_index: 'index.handlebars',
       output_index: 'index.html',
-      include_empty_files: true
+      include_empty_files: true,
+      destination: './',
+      compiled_css: null
     });
 
     // Output options if --verbose cl option is passed
@@ -33,6 +35,24 @@ module.exports = function(grunt){
     // Describe custom parsers
     for(key in options.parsers){
       dss.parser(key, options.parsers[key]);
+    }
+
+    // Extract information about the destination folders
+    var folders = [];
+    if (this.files.length > 1){
+
+      folders = this.files.map(function(f){
+
+        var title = f.dest.split("/").filter(Boolean).pop();
+        title = title.charAt(0).toUpperCase() + title.slice(1);
+
+        return {
+          dest: f.dest,
+          title: title
+        };
+
+      });
+
     }
 
     // Build Documentation
@@ -53,7 +73,7 @@ module.exports = function(grunt){
       // Setup
       var files = src,
           template_dir = options.template,
-          output_dir = f.dest,
+          output_dir = options.destination + f.dest,
           length = files.length,
           styleguide = [];
 
@@ -70,6 +90,7 @@ module.exports = function(grunt){
           if (options.include_empty_files || parsed.blocks.length) {
             // Add filename
             parsed['file'] = filename;
+            parsed['filename'] = filename.split('/').pop();
 
             // Add comment block to styleguide
             styleguide.push(parsed);
@@ -107,7 +128,9 @@ module.exports = function(grunt){
             // Create HTML ouput
             var html = handlebars.compile(grunt.file.read(template_filepath))({
               project: grunt.file.readJSON('package.json'),
-              files: styleguide
+              folders: folders,
+              files: styleguide,
+              compiled_css: options.compiled_css
             });
 
             var output_type = 'created', output = null;
