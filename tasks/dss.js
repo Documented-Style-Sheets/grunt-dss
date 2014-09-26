@@ -34,6 +34,11 @@ module.exports = function(grunt){
     for(key in options.parsers){
       dss.parser(key, options.parsers[key]);
     }
+    
+    // Register custom handlebar helpers.
+    for(key in options.helpers){
+      handlebars.registerHelper(key, options.helpers[key]);
+    }
 
     // Build Documentation
     this.files.forEach(function(f){
