@@ -63,6 +63,37 @@ Default value: `true`
 
 Include files without DSS annotations.
 
+#### options.external_markup
+
+Type: `Boolean`
+Default value: `false`
+
+Pull in block markup from an external file. Looks for a file at `{task_path}/markup/{block name}.html`, e.g. `markup/sidebar.html` for a block with `@name: sidebar`.
+
+#### options.misc_sections
+
+Type: `Array`
+Default: `[]`
+
+A list of sections to include in addition to the list of parsed blocks, such as a section on writing style or contact information. Example section: 
+
+```javascript
+misc_sections: [
+  {
+    title: 'Writing Guidelines', //section header
+    class: 'writing-guidelines', //HTML class
+    src: 'markup/sections/writing-guideslines.html' //location of HTML to pull in
+  }
+]
+````
+
+#### options.site_prefix
+
+Type: `String`
+Default: `''`
+
+An optional prefix you can prepend to the CSS/JS assets referenced in your template. Useful for deploying your style guide alongside the project it documents in different deployment environments.
+
 ### Example initConfig
 
 ```javascript
