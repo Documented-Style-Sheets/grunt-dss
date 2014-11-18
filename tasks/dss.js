@@ -24,7 +24,10 @@ module.exports = function(grunt){
       template: __dirname + '/../template/',
       template_index: 'index.handlebars',
       output_index: 'index.html',
-      include_empty_files: true
+      include_empty_files: true,
+      external_markup: false,
+      misc_sections: [],
+      site_prefix: ''
     });
 
     // Output options if --verbose cl option is passed
@@ -68,6 +71,28 @@ module.exports = function(grunt){
 
           // Continue only if file contains DSS annotation
           if (options.include_empty_files || parsed.blocks.length) {
+            
+            //Pull in markup from external files with same name as block
+            if (options.external_markup) {
+              parsed.blocks.forEach(function(b){
+                var external_markup_path = grunt.file.read('markup/' + b.name + '.html');
+                var external_markup = grunt.file.exists(external_markup_path) ? grunt.file.read(external_markup_path) : 'Cannot find markup file';
+                b.external_markup = {
+                  example: external_markup,
+                  escaped: external_markup.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                }
+
+                //If there are states, pull in markup for them too
+                //Looks for blockname-statenameescaped.html
+                if (b.state) {
+                  b.state.forEach(function(s){
+                    var state_markup_path = 'markup/' + b.name + '-' + s.escaped + '.html';
+                    s.state_markup = grunt.file.exists(state_markup_path) ? grunt.file.read(state_markup_path) : 'Cannot find state markup file';
+                  });
+                }
+              });
+            }
+
             // Add filename
             parsed['file'] = filename;
 
@@ -104,11 +129,26 @@ module.exports = function(grunt){
               });
             });
 
+            //Add extra sections if any
+            var misc_sections = [];
+            if (options.misc_sections.length) {
+              options.misc_sections.forEach(function(t) {
+                misc_sections.push({
+                  title: t.title,
+                  class: t.class,
+                  markup: grunt.file.exists(t.src) ? grunt.file.read(t.src) : 'Cannot find section file'
+                });
+              });
+            }
+
             // Create HTML ouput
             var html = handlebars.compile(grunt.file.read(template_filepath))({
               project: grunt.file.readJSON('package.json'),
-              files: styleguide
+              files: styleguide,
+              misc_sections: misc_sections,
+              site_prefix: options.site_prefix
             });
+
 
             var output_type = 'created', output = null;
             if (grunt.file.exists(output_filepath)) {
