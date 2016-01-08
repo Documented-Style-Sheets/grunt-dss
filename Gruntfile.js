@@ -14,7 +14,8 @@ module.exports = function(grunt) {
     dss: {
       docs: {
         options: {
-          template: 'template/'
+          template: 'template/',
+          build_css: ['example/foo.css']
         },
         files: {
           'docs/': 'example/**/*.{css,scss,sass,less,styl}'
@@ -22,7 +23,7 @@ module.exports = function(grunt) {
       }
     },
 
-    // 
+    //
     jshint: {
       all: [
         'Gruntfile.js',
