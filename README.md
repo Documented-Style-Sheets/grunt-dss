@@ -1,4 +1,4 @@
-# Grunt-DSS [![Build Status](https://secure.travis-ci.org/darcyclarke/grunt-dss.png?branch=master)](http://travis-ci.org/darcyclarke/grunt-dss)
+# Grunt-DSS [![Build Status](https://secure.travis-ci.org/DSSWG/grunt-dss.png?branch=master)](http://travis-ci.org/DSSWG/grunt-dss)
 
 **Grunt-DSS** is a **[Grunt](http://gruntjs.com)** plugin that generates UI documentation from CSS, Less, Stylus, Sass files based on the **[DSS](https://github.com/darcyclarke/dss)** parser output.
 
