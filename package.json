@@ -26,16 +26,16 @@
   },
   "dependencies": {
     "dss": "1.0.4",
-    "handlebars": "1.0.12"
+    "handlebars": "~4.7.6"
   },
   "devDependencies": {
-    "grunt": "~0.4.0",
-    "grunt-contrib-jshint": "~0.3.0",
-    "grunt-contrib-nodeunit": "~0.1.2",
-    "grunt-contrib-clean": "~0.4.0"
+    "grunt": "~1.0.4",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-contrib-nodeunit": "^2.0.0"
   },
   "peerDependencies": {
-    "grunt": "~0.4.0"
+    "grunt": "~1.0.4"
   },
   "keywords": [
     "gruntplugin",
